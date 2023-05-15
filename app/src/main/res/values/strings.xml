@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">tFileTransfer</string>
 
-    <string name="error_toast">Error</string>
+    <string name="error_toast">Error: %s</string>
     <!-- File Transport Activity Start -->
     <string name="file_transport_activity_tab_my_apps">MY APPS</string>
     <string name="file_transport_activity_tab_my_images">MY IMAGES</string>
@@ -28,11 +28,13 @@
     <!-- File Transport Activity End -->
 
     <!-- Connection Activity Start -->
-    <string name="broadcast_connection_title">Connect Remote Device via Broadcast</string>
-    <string name="broadcast_connection_description">Use UDP broadcast to connect target device, your device must be in the same network with target device. </string>
+    <string name="local_network_connection_title">Connect Remote Device via LocalNetwork</string>
+    <string name="local_network_connection_description">If two devices in the same local network, you can use this way create connection. \n Use QR code scan or UDP broadcast.</string>
     <string name="broadcast_connection_local_device">Local Device: %s</string>
     <string name="broadcast_connection_local_ip_address">Local IP Address: %s</string>
     <string name="broadcast_connection_use_system_broadcast">Use System Broadcast: </string>
+    <string name="local_network_scan_qr_code">Scan QR Code</string>
+    <string name="local_network_show_qr_code">Show QR Code</string>
     <string name="broadcast_connection_as_receiver">Search Servers</string>
     <string name="broadcast_connection_as_sender">As Server</string>
 
@@ -85,4 +87,10 @@
     <string name="setting_max_connections_size">Max Tcp Connections</string>
     <string name="setting_buffer_size_kb">%d KB</string>
     <!-- Settings End-->
+
+    <!-- Request Permission Start -->
+    <string name="permission_request_title">Request Permission</string>
+    <string name="permission_storage_request_content">tFileTransfer needs MANAGE STORAGE permission to share your files.</string>
+    <!-- Request Permission End -->
+
 </resources>

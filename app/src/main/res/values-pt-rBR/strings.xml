@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">tFileTransfer</string>
-    <string name="error_toast">Error</string>
+    <string name="error_toast">Error: %s</string>
     <!-- File Transport Activity Start -->
     <string name="file_transport_activity_tab_my_apps">APPS</string>
     <string name="file_transport_activity_tab_my_images">IMAGENS</string>
@@ -27,11 +27,13 @@
     <!-- File Transport Activity End -->
 
     <!-- Connection Activity Start -->
-    <string name="broadcast_connection_title">Conectar dispositivo remoto via Broadcast</string>
-    <string name="broadcast_connection_description">Use transmissão UDP para conectar ao dispositivo alvo, tanto seu dispositivo como o outro deve estar na mesma rede. \nUse o sistema Broadcast rápido, embora alguns dispositivos podem não ter suporte para isto.</string>
+    <string name="local_network_connection_title">Conectar dispositivo remoto via Broadcast</string>
+    <string name="local_network_connection_description">Use transmissão UDP para conectar ao dispositivo alvo, tanto seu dispositivo como o outro deve estar na mesma rede. \nUse o sistema Broadcast rápido, embora alguns dispositivos podem não ter suporte para isto.</string>
     <string name="broadcast_connection_local_device">Dispositivo local: %s</string>
     <string name="broadcast_connection_local_ip_address">IP local: %s</string>
     <string name="broadcast_connection_use_system_broadcast">Use sistema Broadcast: </string>
+    <string name="local_network_scan_qr_code">Scan QR Code</string>
+    <string name="local_network_show_qr_code">Show QR Code</string>
     <string name="broadcast_connection_as_receiver">Procurar servidores</string>
     <string name="broadcast_connection_as_sender">Criar servidor</string>
 
@@ -84,5 +86,10 @@
     <string name="setting_max_connections_size">Max Tcp Connections</string>
     <string name="setting_buffer_size_kb">%d KB</string>
     <!-- Settings End-->
+
+    <!-- Request Permission Start -->
+    <string name="permission_request_title">Request Permission</string>
+    <string name="permission_storage_request_content">tFileTransfer needs MANAGE STORAGE permission to share your files.</string>
+    <!-- Request Permission End -->
 
 </resources>

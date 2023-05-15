@@ -1,7 +1,12 @@
 
 ## Summary
 
-Use UDP Broadcast or WiFi P2P create  connections, Use TCP protocol to transfer files. This program builds with RxJava and Kotlin Coroutines.
+Create tcp connections to transfer files without Internet.  
+  
+Create connections ways:
+- Wi-Fi P2P/Direct (Recommend， Super Fast) (No LocalNetwork Limit)
+- Scan QR Code (LocalNetwork Limit)
+- UDP Broadcast (LocalNetwork Limit)
 
 [Install On Google Play](https://play.google.com/store/apps/details?id=com.tans.tfiletransporter)
 
