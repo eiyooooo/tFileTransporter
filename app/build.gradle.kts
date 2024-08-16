@@ -97,20 +97,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel)
     kapt(libs.androidx.lifecycle.compiler)
 
-    // camerax
-    implementation(libs.camerax.core)
-    implementation(libs.camerax.camera2)
-    implementation(libs.camerax.lifecycle)
-    implementation(libs.camerax.video)
-    implementation(libs.camerax.view)
-    implementation(libs.camerax.extensions)
-
-    // barcode scan
-    implementation(libs.barcodescan)
-
-    // qrcode gen
-    implementation(libs.qrcodegen)
-
     // tans5
     implementation(libs.tuiutils)
 

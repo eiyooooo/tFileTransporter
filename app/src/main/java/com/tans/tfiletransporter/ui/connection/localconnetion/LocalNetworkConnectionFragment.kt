@@ -4,41 +4,34 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.net.*
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.net.wifi.p2p.WifiP2pManager
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.getSystemService
 import com.tans.tfiletransporter.R
 import com.tans.tfiletransporter.databinding.LocalAddressItemLayoutBinding
 import com.tans.tfiletransporter.databinding.LocalNetworkConnectionFragmentBinding
-import com.tans.tfiletransporter.file.LOCAL_DEVICE
 import com.tans.tfiletransporter.logs.AndroidLog
 import com.tans.tfiletransporter.netty.findLocalAddressV4
-import com.tans.tfiletransporter.netty.toInetAddress
-import com.tans.tfiletransporter.transferproto.qrscanconn.QRCodeScanClient
-import com.tans.tfiletransporter.transferproto.qrscanconn.model.QRCodeShare
-import com.tans.tfiletransporter.transferproto.qrscanconn.requestFileTransferSuspend
-import com.tans.tfiletransporter.transferproto.qrscanconn.startQRCodeScanClientSuspend
-import com.tans.tfiletransporter.ui.filetransport.FileTransportActivity
-import com.tans.tfiletransporter.ui.qrcodescan.ScanQrCodeActivity
-import com.tans.tfiletransporter.utils.fromJson
-import com.tans.tfiletransporter.utils.showToastShort
-import com.tans.tuiutils.fragment.BaseCoroutineStateFragment
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.net.InetAddress
-import java.util.Optional
-import kotlin.jvm.optionals.getOrNull
-import androidx.core.content.getSystemService
 import com.tans.tfiletransporter.ui.connection.ConnectionActivity
-import com.tans.tuiutils.actresult.startActivityResultSuspend
+import com.tans.tfiletransporter.ui.filetransport.FileTransportActivity
 import com.tans.tuiutils.adapter.impl.builders.SimpleAdapterBuilderImpl
 import com.tans.tuiutils.adapter.impl.databinders.DataBinderImpl
 import com.tans.tuiutils.adapter.impl.datasources.FlowDataSourceImpl
 import com.tans.tuiutils.adapter.impl.viewcreatators.SingleItemViewCreatorImpl
+import com.tans.tuiutils.fragment.BaseCoroutineStateFragment
 import com.tans.tuiutils.view.clicks
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
+import java.net.InetAddress
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 class LocalNetworkConnectionFragment : BaseCoroutineStateFragment<LocalNetworkConnectionFragment.Companion.LocalNetworkState>(
     defaultState = LocalNetworkState()
@@ -132,70 +125,6 @@ class LocalNetworkConnectionFragment : BaseCoroutineStateFragment<LocalNetworkCo
             }
         )
         viewBinding.localAddressesRv.adapter = addressAdapterBuilder.build()
-
-        // Scan QrCode
-        viewBinding.scanQrCodeLayout.clicks(this) {
-            val selectedAddress = currentState().selectedAddress.getOrNull()
-            if (selectedAddress != null) {
-                // Scan QRCode.
-                val (_, resultData) = startActivityResultSuspend(Intent(requireActivity(), ScanQrCodeActivity::class.java))
-                if (resultData != null) {
-                    val scanResultStrings = ScanQrCodeActivity.getResult(resultData)
-                    val qrcodeShare = scanResultStrings.map { it.fromJson<QRCodeShare>() }.firstOrNull()
-                    if (qrcodeShare != null) {
-                        val scanClient = QRCodeScanClient(AndroidLog)
-                        runCatching {
-                            val serverAddress = qrcodeShare.address.toInetAddress()
-                            // Create request transfer file to QRCodeServer connection.
-                            scanClient.startQRCodeScanClientSuspend(serverAddress)
-                            AndroidLog.d(TAG, "Client connect address: $serverAddress success.")
-                            withContext(Dispatchers.IO) {
-                                // Request transfer file.
-                                scanClient.requestFileTransferSuspend(targetAddress = serverAddress, deviceName = LOCAL_DEVICE)
-                            }
-                            serverAddress
-                        }.onSuccess { serverAddress ->
-                            withContext(Dispatchers.Main) {
-                                requireActivity().startActivity(
-                                    FileTransportActivity.getIntent(
-                                        context = requireContext(),
-                                        localAddress = selectedAddress,
-                                        remoteAddress = serverAddress,
-                                        remoteDeviceInfo = qrcodeShare.deviceName,
-                                        isServer = false,
-                                        requestShareFiles = (requireActivity() as ConnectionActivity).consumeRequestShareFiles()
-                                    ))
-                            }
-                        }.onFailure {
-                            withContext(Dispatchers.Main) {
-                                requireActivity().showToastShort(getString(R.string.error_toast, it.message))
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        // Show QrCode
-        viewBinding.showQrCodeLayout.clicks(this) {
-            val selectedAddress = currentState().selectedAddress.getOrNull()
-            if (selectedAddress != null) {
-                val remoteAddress = childFragmentManager.showQRCodeServerDialogSuspend(selectedAddress)
-                if (remoteAddress != null) {
-                    withContext(Dispatchers.Main.immediate) {
-                        requireActivity().startActivity(
-                            FileTransportActivity.getIntent(
-                                context = requireContext(),
-                                localAddress = selectedAddress,
-                                remoteAddress = remoteAddress.remoteAddress.address,
-                                remoteDeviceInfo = remoteAddress.deviceName,
-                                isServer = true,
-                                requestShareFiles = (requireActivity() as ConnectionActivity).consumeRequestShareFiles()
-                            ))
-                    }
-                }
-            }
-        }
 
         // Search Servers
         viewBinding.searchServerLayout.clicks(this) {
