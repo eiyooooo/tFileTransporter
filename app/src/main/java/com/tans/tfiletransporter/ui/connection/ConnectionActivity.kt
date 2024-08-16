@@ -17,7 +17,6 @@ import com.tans.tfiletransporter.databinding.ConnectionActivityBinding
 import com.tans.tfiletransporter.logs.AndroidLog
 import com.tans.tfiletransporter.ui.commomdialog.showOptionalDialogSuspend
 import com.tans.tfiletransporter.ui.commomdialog.showSettingsDialog
-import com.tans.tfiletransporter.ui.connection.localconnetion.LocalNetworkConnectionFragment
 import com.tans.tfiletransporter.ui.connection.wifip2pconnection.WifiP2pConnectionFragment
 import com.tans.tfiletransporter.utils.uri2FileReal
 import com.tans.tuiutils.activity.BaseCoroutineStateActivity
@@ -36,10 +35,6 @@ class ConnectionActivity : BaseCoroutineStateActivity<ConnectionActivity.Compani
 
     private val wifiP2pFragment by lazyViewModelField("wifiP2pFragment") {
         WifiP2pConnectionFragment()
-    }
-
-    private val localNetworkFragment by lazyViewModelField("localNetworkFragment") {
-        LocalNetworkConnectionFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,13 +110,6 @@ class ConnectionActivity : BaseCoroutineStateActivity<ConnectionActivity.Compani
         }
         tcWifiP2p.setMaxLifecycle(wifiP2pFragment, Lifecycle.State.RESUMED)
         tcWifiP2p.commitAllowingStateLoss()
-
-        val tcLocalNetwork = supportFragmentManager.beginTransaction()
-        if (supportFragmentManager.findFragmentByTag(LOCAL_NETWORK_FRAGMENT_TAG) == null) {
-            tcWifiP2p.add(R.id.local_network_fragment_container, localNetworkFragment, LOCAL_NETWORK_FRAGMENT_TAG)
-        }
-        tcLocalNetwork.setMaxLifecycle(localNetworkFragment, Lifecycle.State.RESUMED)
-        tcLocalNetwork.commitAllowingStateLoss()
 
         ViewCompat.setOnApplyWindowInsetsListener(viewBinding.nestedScrollView) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -202,7 +190,6 @@ class ConnectionActivity : BaseCoroutineStateActivity<ConnectionActivity.Compani
         private const val TAG = "ConnectionActivity"
 
         private const val WIFI_P2P_CONNECTION_FRAGMENT_TAG = "WIFI_P2P_CONNECTION_FRAGMENT_TAG"
-        private const val LOCAL_NETWORK_FRAGMENT_TAG = "LOCAL_NETWORK_FRAGMENT_TAG"
 
         data class ConnectionActivityState(
             val requestShareFiles: List<File> = emptyList()
