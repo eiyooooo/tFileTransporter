@@ -64,25 +64,3 @@ inline fun <reified Request, reified Response> IClientManager.requestSimplify(
         callback = callback
     )
 }
-
-inline fun <reified Request, reified Response> IClientManager.requestSimplify(
-    type: Int,
-    request: Request,
-    targetAddress: InetSocketAddress,
-    senderAddress: InetSocketAddress? = null,
-    retryTimes: Int = 2,
-    retryTimeout: Long = 1000L,
-    callback: IClientManager.RequestCallback<Response>
-) {
-    request(
-        type = type,
-        request = request,
-        requestClass = Request::class.java,
-        responseClass = Response::class.java,
-        targetAddress = targetAddress,
-        senderAddress = senderAddress,
-        retryTimes = retryTimes,
-        retryTimeout = retryTimeout,
-        callback = callback
-    )
-}

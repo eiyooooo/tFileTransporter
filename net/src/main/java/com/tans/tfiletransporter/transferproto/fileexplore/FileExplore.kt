@@ -42,7 +42,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
 /**
- * [FileExplore]'s connection could be created by QRCode, Udp broadcast and Wifi p2p create connection, see [com.tans.tfiletransporter.transferproto.qrscanconn], [com.tans.tfiletransporter.transferproto.broadcastconn] and [com.tans.tfiletransporter.transferproto.p2pconn].
+ * [FileExplore]'s connection could be created by Wifi p2p create connection, see [com.tans.tfiletransporter.transferproto.p2pconn].
  * Server bind TCP [TransferProtoConstant.FILE_EXPLORE_PORT] port wait Client to connect.
  * After connect is created, client will send request [FileExploreDataType.HandshakeReq] [HandshakeReq] to server to handshake.
  * When handshake is ok, client and server could send requests each other, include [FileExploreDataType.DownloadFilesReq], [FileExploreDataType.SendFilesReq], [FileExploreDataType.ScanDirReq], [FileExploreDataType.SendMsgReq]

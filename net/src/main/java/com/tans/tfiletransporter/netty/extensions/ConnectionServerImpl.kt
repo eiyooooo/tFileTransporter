@@ -17,8 +17,7 @@ fun <T> INettyConnectionTask.withServer(
         is ConnectionClientImpl -> {
             val impl = DefaultServerManager(
                 connectionTask = this.connectionTask,
-                converterFactory = converterFactory,
-                log = log
+                converterFactory = converterFactory
             )
             ConnectionServerClientImpl(
                 connectionTask = this.connectionTask,
@@ -29,8 +28,7 @@ fun <T> INettyConnectionTask.withServer(
         is ConnectionServerImpl -> {
             val impl = DefaultServerManager(
                 connectionTask = this.connectionTask,
-                converterFactory = converterFactory,
-                log = log
+                converterFactory = converterFactory
             )
             this.clearAllServers()
             ConnectionServerImpl(
@@ -41,8 +39,7 @@ fun <T> INettyConnectionTask.withServer(
         is ConnectionServerClientImpl -> {
             val impl = DefaultServerManager(
                 connectionTask = this.connectionTask,
-                converterFactory = converterFactory,
-                log = log
+                converterFactory = converterFactory
             )
             this.clearAllServers()
             ConnectionServerClientImpl(
@@ -54,8 +51,7 @@ fun <T> INettyConnectionTask.withServer(
         else -> {
             val impl = DefaultServerManager(
                 connectionTask = this,
-                converterFactory = converterFactory,
-                log = log
+                converterFactory = converterFactory
             )
             ConnectionServerImpl(
                 connectionTask = this,

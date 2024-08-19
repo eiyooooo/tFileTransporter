@@ -20,12 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep, allowobfuscation, allowoptimization class org.kodein.type.TypeReference
--keep, allowobfuscation, allowoptimization class org.kodein.type.JVMAbstractTypeToken$Companion$WrappingTest
-
--keep, allowobfuscation, allowoptimization class * extends org.kodein.type.TypeReference
--keep, allowobfuscation, allowoptimization class * extends org.kodein.type.JVMAbstractTypeToken$Companion$WrappingTest
-
 -keep class io.netty.** {*;}
 -keep class org.apache.** {*;}
 -keep class org.slf4j.** {*;}
@@ -51,9 +45,6 @@
 -keepclassmembernames class io.netty.buffer.AbstractByteBufAllocator {*;}
 -keepclassmembernames class io.netty.buffer.AdvancedLeakAwareByteBuf {*;}
 -keep public class io.netty.util.ReferenceCountUtil {*;}
-
-#Kodein
--keep class org.kodein.di.** {*;}
 
 -dontwarn com.aayushatharva.brotli4j.Brotli4jLoader
 -dontwarn com.aayushatharva.brotli4j.decoder.DecoderJNI$Status

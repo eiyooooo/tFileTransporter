@@ -38,11 +38,3 @@ fun findLocalAddressV4(): List<InetAddress> {
     }
     return result
 }
-
-fun InetAddress.toInt(): Int {
-    return address.toInt()
-}
-
-fun Int.toInetAddress(): InetAddress {
-    return InetAddress.getByAddress(this.toBytes())
-}

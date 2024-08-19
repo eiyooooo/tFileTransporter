@@ -1,6 +1,5 @@
 package com.tans.tfiletransporter.netty.extensions
 
-import com.tans.tfiletransporter.ILog
 import com.tans.tfiletransporter.netty.INettyConnectionTask
 import com.tans.tfiletransporter.netty.NettyConnectionObserver
 import com.tans.tfiletransporter.netty.NettyTaskState
@@ -11,8 +10,7 @@ import java.util.concurrent.LinkedBlockingDeque
 
 class DefaultServerManager(
     val connectionTask: INettyConnectionTask,
-    private val converterFactory: IConverterFactory = DefaultConverterFactory(),
-    private val log: ILog
+    private val converterFactory: IConverterFactory = DefaultConverterFactory()
 ) : IServerManager, NettyConnectionObserver {
 
     init {
@@ -60,9 +58,5 @@ class DefaultServerManager(
 
     override fun clearAllServers() {
         servers.clear()
-    }
-
-    companion object {
-        private const val TAG = "DefaultServerManager"
     }
 }

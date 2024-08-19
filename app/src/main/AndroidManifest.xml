@@ -73,13 +73,6 @@
             tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
 
         <activity
-            android:name=".ui.qrcodescan.ScanQrCodeActivity"
-            android:screenOrientation="portrait"
-            android:taskAffinity=".transfer"
-            android:configChanges="orientation|screenSize|uiMode"
-            tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
-
-        <activity
             android:name=".ui.folderselect.FolderSelectActivity"
             android:screenOrientation="portrait"
             android:taskAffinity=".transfer"

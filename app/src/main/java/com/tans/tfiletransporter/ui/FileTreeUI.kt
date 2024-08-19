@@ -119,7 +119,7 @@ class FileTreeUI(
                     }
                     updateState { it.copy(selectedFiles = newSelectedFiles) }
                 }
-            }.addPayloadDataBinder(Unit, ) { data, view, _ ->
+            }.addPayloadDataBinder(Unit) { data, view, _ ->
                 val itemViewBinding = FileItemLayoutBinding.bind(view)
                 itemViewBinding.fileCb.isChecked = data.second
             }

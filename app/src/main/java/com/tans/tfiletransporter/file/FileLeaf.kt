@@ -3,8 +3,7 @@ package com.tans.tfiletransporter.file
 import androidx.annotation.Keep
 
 @Keep
-sealed class FileLeaf(
-) {
+sealed class FileLeaf {
     abstract val name: String
     abstract val path: String
     abstract val lastModified: Long

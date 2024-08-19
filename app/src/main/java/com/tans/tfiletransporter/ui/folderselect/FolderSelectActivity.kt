@@ -5,8 +5,6 @@ import android.content.Intent
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.tans.tfiletransporter.R
 import com.tans.tfiletransporter.Settings
 import com.tans.tfiletransporter.databinding.FolderSelectActivityBinding
@@ -16,7 +14,6 @@ import com.tans.tfiletransporter.file.newLocalSubTree
 import com.tans.tfiletransporter.ui.FileTreeUI
 import com.tans.tfiletransporter.ui.commomdialog.showNoOptionalDialogSuspend
 import com.tans.tfiletransporter.ui.commomdialog.showTextInputDialogSuspend
-import com.tans.tfiletransporter.utils.dp2px
 import com.tans.tuiutils.activity.BaseCoroutineStateActivity
 import com.tans.tuiutils.systembar.annotation.SystemBarStyle
 import com.tans.tuiutils.view.clicks
